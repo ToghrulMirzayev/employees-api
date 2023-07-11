@@ -1,6 +1,6 @@
 import os
 import psycopg2
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from dotenv import load_dotenv
 import jwt
 
@@ -11,7 +11,10 @@ JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 USERNAME = os.getenv("APP_SUPERUSER")
 PASSWORD = os.getenv("APP_PASSWORD")
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='static')
+app.config['STATICFILES_DIRS'] = [
+    os.path.join(app.static_folder, 'files')
+]
 
 conn = psycopg2.connect(CONNECTION_STRING_DB)
 
@@ -94,10 +97,10 @@ def get_employees():
     employees = []
     for row in rows:
         employee = {
-            'employeeId': row[0],
-            'name': row[1],
-            'organization': row[2],
-            'skill': row[3]
+            'name': row[0],
+            'organization': row[1],
+            'skill': row[2],
+            'employeeId': row[3],
         }
         employees.append(employee)
     cur.close()
@@ -197,6 +200,17 @@ def delete_employee(employee_id):
         conn.commit()
         return jsonify({'message': 'Employee deleted'})
     return jsonify({'error': 'Employee not found'}), 404
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/get_token')
+def get_token():
+    token = os.getenv('BEARER_TOKEN')
+    return jsonify({'token': token})
 
 
 if __name__ == '__main__':

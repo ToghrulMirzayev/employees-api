@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Employees App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='files/style.css') }}" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Condensed&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="toggle-container">
+    <span>Day/Night</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="toggle-theme" />
+      <span class="toggle-slider round"></span>
+    </label>
+  </div>
+  <h1>Employees table</h1>
+  <h3>Find registered employees below</h3>
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th onclick="sortTable(0)">Name</th>
+        <th onclick="sortTable(1)">Org</th>
+        <th onclick="sortTable(2)">Role</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+  </table>
+  <script type="text/javascript" src="files/script.js"></script>
+  <script type="text/javascript" src="files/script_theme.js"></script>
+  <script type="text/javascript" src="files/main.js"></script>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-content">By Toghrul Mirzayev</div>
+    </div>
+  </footer>
+</body>
+</html>
