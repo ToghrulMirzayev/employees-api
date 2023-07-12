@@ -1,4 +1,4 @@
-# team-api
+# employees-api
 
 A simple app to help my students understand backend development and cover it with automated tests.
 
