@@ -20,8 +20,15 @@ A simple app to help my students understand backend development and cover it wit
  | employee_id    | SERIAL    |
  | name           | TEXT      |
  | organization   | TEXT      |
- | skill          | TEXT      |
+ | role           | TEXT      |
 ```
-* Create `.env` in root directory and add environment variables there
+* To make this code work in your local machine, create `.env` in root directory and add environment variables there as shown in below example:
+```
+CONNECTION_STRING_DB='your postgresql connection string'
+JWT_SECRET_KEY='your secret key'
+APP_SUPERUSER='your username'
+APP_PASSWORD='your password'
+BEARER_TOKEN='your token'
+```
 * Run application using below command:
   * `python app.py`

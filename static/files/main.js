@@ -15,7 +15,7 @@ fetch('/get_token')
               row.innerHTML = `
                 <td>${employee.name}</td>
                 <td>${employee.organization}</td>
-                <td>${employee.skill}</td>
+                <td>${employee.role}</td>
               `;
               tableBody.appendChild(row);
             });

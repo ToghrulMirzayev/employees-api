@@ -70,16 +70,16 @@ def create_employee():
     data = request.get_json()
     name = data.get('name')
     organization = data.get('organization')
-    skill = data.get('skill')
-    cur.execute("INSERT INTO employees (employee_id, name, organization, skill) VALUES (%s, %s, %s, %s)",
-                (new_id, name, organization, skill))
+    role = data.get('role')
+    cur.execute("INSERT INTO employees (employee_id, name, organization, role) VALUES (%s, %s, %s, %s)",
+                (new_id, name, organization, role))
     conn.commit()
     cur.close()
     return jsonify({
         'employeeId': new_id,
         'name': name,
         'organization': organization,
-        'skill': skill
+        'role': role
     })
 
 
@@ -99,7 +99,7 @@ def get_employees():
         employee = {
             'name': row[0],
             'organization': row[1],
-            'skill': row[2],
+            'role': row[2],
             'employeeId': row[3],
         }
         employees.append(employee)
@@ -121,10 +121,10 @@ def get_employee(employee_id):
     cur.close()
     if employee:
         return jsonify({
-            'employeeId': employee[0],
-            'name': employee[1],
-            'organization': employee[2],
-            'skill': employee[3]
+            'name': employee[0],
+            'organization': employee[1],
+            'role': employee[2],
+            'employeeId': employee[3],
         })
     return jsonify({'error': 'Employee not found'}), 404
 
@@ -141,9 +141,9 @@ def update_employee(employee_id):
     data = request.get_json()
     name = data.get('name')
     organization = data.get('organization')
-    skill = data.get('skill')
-    cur.execute("UPDATE employees SET name = %s, organization = %s, skill = %s WHERE employee_id = %s",
-                (name, organization, skill, employee_id))
+    role = data.get('role')
+    cur.execute("UPDATE employees SET name = %s, organization = %s, role = %s WHERE employee_id = %s",
+                (name, organization, role, employee_id))
     updated_rows = cur.rowcount
     conn.commit()
     cur.close()
@@ -164,14 +164,14 @@ def patch_employee(employee_id):
     data = request.get_json()
     name = data.get('name')
     organization = data.get('organization')
-    skill = data.get('skill')
+    role = data.get('role')
     update_fields = []
     if name:
         update_fields.append("name = %s")
     if organization:
         update_fields.append("organization = %s")
-    if skill:
-        update_fields.append("skill = %s")
+    if role:
+        update_fields.append("role = %s")
     if not update_fields:
         return jsonify({'message': 'No fields to update'})
     update_query = "UPDATE employees SET " + ", ".join(update_fields) + " WHERE employee_id = %s"
