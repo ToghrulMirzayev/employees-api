@@ -14,6 +14,8 @@ A simple app to help my students understand backend development and cover it wit
 * Install dependencies:
   * `pip install -r requirements.txt`
 * Make sure that your DB prepared with below structure:
+
+Table name: `employees`
 ```
  | Column         | Data Type |
  |----------------|-----------|
