@@ -6,6 +6,29 @@ Application will start running at http://localhost:5000/
 ## Overall description
 This web application is intended for my students studying test automation. The application only contains `index.html` and multiple endpoints, which can be used to manipulate data in Postgresql.
 
+# /generate-token
+
+This endpoint is used to generate token
+
+* To get the token, send POST request to `/generate-token` endpoint.
+
+Request example:
+```
+{
+    "username": "<your username>",
+    "password": "<your password>"
+}
+```
+
+Response example:
+```
+{
+    "token": "<generated token>"
+}
+```
+`Note:`
+Generated token should be included as a 'Bearer' token in the Authorization header of all requests to authenticate access
+
 # /employees
 
 This endpoint is used to manipulate data in `employees` table
