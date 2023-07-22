@@ -94,14 +94,24 @@ def get_employees():
     cur = conn.cursor()
     cur.execute("SELECT * FROM employees")
     rows = cur.fetchall()
+    column_names = [desc[0] for desc in cur.description]
     employees = []
     for row in rows:
         employee = {
-            'name': row[0],
-            'organization': row[1],
-            'role': row[2],
-            'employeeId': row[3],
+            'name': None,
+            'organization': None,
+            'role': None,
+            'employeeId': None,
         }
+        for col_name, value in zip(column_names, row):
+            if col_name == 'name':
+                employee['name'] = value
+            elif col_name == 'organization':
+                employee['organization'] = value
+            elif col_name == 'role':
+                employee['role'] = value
+            elif col_name == 'employee_id':
+                employee['employeeId'] = value
         employees.append(employee)
     cur.close()
     return jsonify(employees)
