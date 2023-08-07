@@ -30,7 +30,6 @@ CONNECTION_STRING_DB='your postgresql connection string'
 JWT_SECRET_KEY='your secret key'
 APP_SUPERUSER='your username'
 APP_PASSWORD='your password'
-BEARER_TOKEN='your token'
 ```
 * Run application using below command:
   * `python app.py`

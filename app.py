@@ -31,10 +31,17 @@ def generate_token():
     return jsonify({'token': encoded_token})
 
 
+@app.route('/get_environment_variables')
+def get_environment_variables():
+    return jsonify({
+        'username': USERNAME,
+        'password': PASSWORD,
+        'jwt_secret_key': JWT_SECRET_KEY
+    })
+
+
 def authenticate_user(username, password):
-    if username == USERNAME and password == PASSWORD:
-        return True
-    return False
+    return username == USERNAME and password == PASSWORD
 
 
 def validate_token(token):
@@ -215,12 +222,6 @@ def delete_employee(employee_id):
 @app.route('/')
 def index():
     return render_template('index.html')
-
-
-@app.route('/get_token')
-def get_token():
-    token = os.getenv('BEARER_TOKEN')
-    return jsonify({'token': token})
 
 
 if __name__ == '__main__':
