@@ -99,7 +99,7 @@ def get_employees():
     if not validate_token(token):
         return jsonify({'message': 'Invalid token'}), 401
     cur = conn.cursor()
-    cur.execute("SELECT * FROM employees")
+    cur.execute("SELECT * FROM employees ORDER BY employee_id")
     rows = cur.fetchall()
     column_names = [desc[0] for desc in cur.description]
     employees = []
